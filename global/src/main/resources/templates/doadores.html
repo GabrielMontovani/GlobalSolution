@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+
+<head th:include="_template :: head"></head>
+
+<body>
+
+	<header th:include="_template :: header"></header>
+	
+	<div class="alert" th:if="${message != null}" th:text="${message}"></div>
+	
+	<div class="card">
+		<nav th:include="_template :: menu('doador')"></nav>
+		<a href="/doador/new" class="button primary action">
+			<span class="material-icons">
+				add_circle_outline
+			</span>
+			<span th:text="#{label.newdoador}"></span>
+		</a>
+		
+		 <aside class="right">
+            <img alt="" th:src="@{~/images/crianca-comendo.jpg}">
+        </aside>
+		
+		
+		<div class="doadores">
+			<div class="card doador" th:each="doador : ${doadores}">
+				<div>
+					<h3 th:text="${doador.title}"></h3>
+					<span th:text="'R$' +${doador.price}"></span>
+				</div>
+				<p th:text="${doador.description}"></p>
+				
+				
+				<div class="doador-actions">
+					<span>
+						<img 
+							th:if="${doador.user != null}"
+							class="avatar" 
+							alt="ower" 
+							th:src="${doador.user.avatarUrl}"
+						>
+					</span>
+					
+
+						
+						<button th:onclick="window.location.href='/doador/update/[[${doador.id}]]'" class="icon primary" th:title="#{doador.update}">
+						<span
+						class="material-icons yellow">update</span>
+					</button>	
+				
+					<button th:onclick="window.location.href='/doador/delete/[[${doador.id}]]'" class="icon primary" th:title="#{doador.delete}">	
+						 <span
+						class="material-icons red">delete</span>
+					</button>
+				</div>
+			</div>		
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<meta charset="utf-8">
+<head th:include="_template :: head"></head>
+<body>
+
+	<h1>Bora Comer!</h1>
+	
+	<section class="card form">
+		<h2>Atualizar Doação</h2>
+		
+	<form action="#" 
+  		th:action="@{{id}(id=${doador.id})}" 
+ 		th:object="${doador}" 
+  		method="post">
+    		<label  for="title">Nome</label>
+			<input type="text" th:field="*{title}" id="title" value="${title}">
+    		<span class="error" th:errors="*{title}"></span>
+    		<label for="description">Descrição</label>
+    		<input type="text" th:field="*{description}" id="description" value="${description}">
+    		
+    		<label for="email">Email</label>
+			<input type="email" name="usuario" id="email">
+			
+			<label for="cpf">CPF</label>
+			<input type="number" name="cpf" id="cpf">
+			
+    <span class="error"  th:errors="*{description}"></span>
+    			<label for="price">Preço</label>
+			<input 
+				type="text" 
+				name="price" 
+				id="price" 
+				th:field="*{price}"
+				th:classappend="${#fields.hasErrors('price')}?invalid"			 
+			/>
+    	<input type="submit" value="Update Doador">   
+	</form>
+	</section>
+
+</body>
+</html>
